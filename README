@@ -12,7 +12,7 @@ Example:
 
 import "github.com/pmylund/go-bitset"
 
-b := bitset.New()
+b := bitset.New(10000)
 b.Set(1000)
 if b.Test(1000) {
 	fmt.Println("Bit 1000 is set!")
@@ -20,7 +20,8 @@ if b.Test(1000) {
 b.Clear(1000)
 b.Set(10)
 
-ob := bitset.New()
+ob := bitset.New(0)
+// ob expands automatically
 ob.Set(10)
 
 if b.Intersection(ob).Count() > 1 {
