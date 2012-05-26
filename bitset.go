@@ -35,7 +35,7 @@ func (b *Bitset) Len() uint32 {
 	return b.n
 }
 
-/// Test whether bit n is set. 
+/// Test whether bit i is set.
 func (b *Bitset) Test(i uint32) bool {
 	if i >= b.n {
 		return false
@@ -259,7 +259,7 @@ func (b *Bitset) String() string {
 }
 
 // Make a new bitset with a starting capacity of n bits. The bitset expands
-// automatically. The maximum capacity of the bitset is 4,294,967,295 bits.
+// automatically.
 func New(n uint32) *Bitset {
 	return &Bitset{n, make([]uint32, wordsNeeded(n))}
 }
