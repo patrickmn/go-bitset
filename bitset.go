@@ -35,7 +35,7 @@ func (b *Bitset) Len() uint32 {
 	return b.n
 }
 
-/// Test whether bit i is set.
+// Test whether bit i is set.
 func (b *Bitset) Test(i uint32) bool {
 	if i >= b.n {
 		return false

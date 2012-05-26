@@ -8,7 +8,16 @@ are set, and the ability to query the bitset's length and number of set bits.
 
 Bitsets are expanded automatically to the size of the largest bit set.
 
-Example:
+== Installation
+
+go get github.com/pmylund/go-bitset
+
+== Documentation
+
+go doc github.com/pmylund/go-bitset
+or http://go.pkgdoc.org/github.com/pmylund/go-bitset
+
+== Usage
 
 import "github.com/pmylund/go-bitset"
 
@@ -27,5 +36,6 @@ ob.Set(10)
 if b.Intersection(ob).Count() > 1 {
 	fmt.Println("The two sets intersect!")
 }
+
 
 go-bitset is based on bitset by William Fitzgerald.
