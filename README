@@ -1,4 +1,4 @@
-go-bitset is an efficient implementation of a map between 32-bit unsigned
+go-bitset is an efficient implementation of a map between unsigned, 32-bit
 integers and boolean values. It provides methods for setting, clearing,
 flipping, and testing individual integers.
 
