@@ -165,7 +165,7 @@ func sortByLength(a *Bitset, b *Bitset) (ap *Bitset, bp *Bitset) {
 	return
 }
 
-// Bitset & (and); intersection of receiver and another set
+// Bitset & (and); intersection of receiver and another set.
 func (b *Bitset) Intersection(ob *Bitset) (result *Bitset) {
 	b, ob = sortByLength(b, ob)
 	result = New(b.n)
@@ -175,7 +175,7 @@ func (b *Bitset) Intersection(ob *Bitset) (result *Bitset) {
 	return
 }
 
-// Bitset | (or); union of receiver and another set
+// Bitset | (or); union of receiver and another set.
 func (b *Bitset) Union(ob *Bitset) (result *Bitset) {
 	b, ob = sortByLength(b, ob)
 	result = ob.Clone()
@@ -218,7 +218,7 @@ func (b *Bitset) cleanLastWord() {
 	}
 }
 
-// Return the (local) complement of a bitset (up to n bits)
+// Return the (local) complement of a bitset (up to n bits).
 func (b *Bitset) Complement() (result *Bitset) {
 	b.String()
 	result = New(b.n)
