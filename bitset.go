@@ -52,7 +52,7 @@ func (b *Bitset) Set(i uint32) {
 			nb := make([]uint32, nsize-l)
 			b.b = append(b.b, nb...)
 		}
-		b.n = i+1
+		b.n = i + 1
 	}
 	b.b[i>>lLog2Word] |= (1 << (i & (lWord - 1)))
 }
@@ -75,10 +75,8 @@ func (b *Bitset) Flip(i uint32) {
 
 // Clear all bits in the bitset.
 func (b *Bitset) ClearAll() {
-	if b != nil {
-		for i := range b.b {
-			b.b[i] = 0
-		}
+	for i := range b.b {
+		b.b[i] = 0
 	}
 }
 
@@ -97,9 +95,6 @@ func (b *Bitset) Clone() *Bitset {
 // Copy the bitset into another bitset, returning the size of the destination
 // bitset.
 func (b *Bitset) Copy(c *Bitset) (n uint32) {
-	if c == nil {
-		return
-	}
 	copy(c.b, b.b)
 	n = c.n
 	if b.n < c.n {
@@ -126,22 +121,16 @@ func popCountUint32(x uint32) uint32 {
 
 // Get the number of set bits in the bitset.
 func (b *Bitset) Count() uint32 {
-	if b != nil {
-		sum := uint32(0)
-		for _, w := range b.b {
-			sum += popCountUint32(w)
-		}
-		return sum
+	sum := uint32(0)
+	for _, w := range b.b {
+		sum += popCountUint32(w)
 	}
-	return 0
+	return sum
 }
 
 // Test if two bitsets are equal. Returns true if both bitsets are the same
 // size, and if all of the same bits are set in both bitsets.
 func (b *Bitset) Equal(c *Bitset) bool {
-	if c == nil {
-		return false
-	}
 	if b.n != c.n {
 		return false
 	}
@@ -247,13 +236,10 @@ func (b *Bitset) All() bool {
 
 // Returns true if no bit in the bitset is set.
 func (b *Bitset) None() bool {
-	if b != nil {
-		for _, w := range b.b {
-			if w > 0 {
-				return false
-			}
+	for _, w := range b.b {
+		if w > 0 {
+			return false
 		}
-		return true
 	}
 	return true
 }
