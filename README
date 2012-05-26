@@ -1,0 +1,30 @@
+go-bitset is an efficient implementation of a map between 32-bit unsigned
+integers and boolean values. It provides methods for setting, clearing,
+flipping, and testing individual integers.
+
+go-bitset also provides set intersection, union, difference, complement, and
+symmetric operations, as well as tests to check whether any, all, or no bits
+are set, and the ability to query the bitset's length and number of set bits.
+
+Bitsets are expanded automatically to the size of the largest bit set.
+
+Example:
+
+import "github.com/pmylund/go-bitset"
+
+b := bitset.New()
+b.Set(1000)
+if b.Test(1000) {
+	fmt.Println("Bit 1000 is set!")
+}
+b.Clear(1000)
+b.Set(10)
+
+ob := bitset.New()
+ob.Set(10)
+
+if b.Intersection(ob).Count() > 1 {
+	fmt.Println("The two sets intersect!")
+}
+
+go-bitset is based on bitset by William Fitzgerald.
