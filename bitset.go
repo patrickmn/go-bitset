@@ -129,7 +129,7 @@ func (b *Bitset) Count() uint32 {
 }
 
 // Test if two bitsets are equal. Returns true if both bitsets are the same
-// size, and if all of the same bits are set in both bitsets.
+// size and all the same bits are set in both bitsets.
 func (b *Bitset) Equal(c *Bitset) bool {
 	if b.n != c.n {
 		return false
