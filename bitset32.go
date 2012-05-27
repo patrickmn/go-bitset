@@ -254,7 +254,7 @@ func (b *Bitset32) String() string {
 func New32(n uint32) *Bitset32 {
 	nWords := wordsNeeded32(n)
 	if nWords > math.MaxInt32-1 {
-		panic(fmt.Sprintf("Bitset32 needs %d %d-bit words to store %d bits, but slices cannot hold more than %d items.", nWords, sw_32, n, math.MaxInt32-1))
+		panic(fmt.Sprintf("Bitset32 needs %d %d-bit words to store %d bits, but slices cannot hold more than %d items. Please use a Bitset64 instead.", nWords, sw_32, n, math.MaxInt32-1))
 	}
 	b := &Bitset32{
 		n,
