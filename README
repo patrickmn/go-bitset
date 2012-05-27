@@ -21,7 +21,7 @@ or http://go.pkgdoc.org/github.com/pmylund/go-bitset
 
 import "github.com/pmylund/go-bitset"
 
-b := bitset.New(10000)
+b := bitset.New32(10000)
 b.Set(1000)
 if b.Test(1000) {
 	fmt.Println("Bit 1000 is set!")
@@ -29,7 +29,7 @@ if b.Test(1000) {
 b.Clear(1000)
 b.Set(10)
 
-ob := bitset.New(0)
+ob := bitset.New64(0)
 // ob expands automatically
 ob.Set(10)
 
