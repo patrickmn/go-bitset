@@ -1,7 +1,3 @@
-// Copyright 2011 Will Fitzgerald. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package bitset
 
 import (
@@ -10,60 +6,68 @@ import (
 	"testing"
 )
 
-func TestEmptyBitset(t *testing.T) {
-	b := New(0)
+func TestEmpty64(t *testing.T) {
+	b := New64(0)
 	if l := b.Len(); l != 0 {
 		t.Errorf("Empty set should be of length 0, not %d", l)
 	}
 }
 
-func TestBitsetNew(t *testing.T) {
-	v := New(16)
-	if v.Test(0) != false {
+func TestNew64(t *testing.T) {
+	v := New64(16)
+	if v.Test(0) {
 		t.Errorf("Unable to make a bit set and read its 0th value.")
 	}
 }
 
-func TestBitsetHuge(t *testing.T) {
-	v := New(math.MaxUint32)
-	if v.Test(0) != false {
+func TestHuge64(t *testing.T) {
+	v := New64(math.MaxUint32)
+	if v.Test(0) {
 		t.Errorf("Unable to make a huge bit set and read its 0th value.")
+	}
+	v.Set(math.MaxInt32)
+	if !v.Test(math.MaxInt32) {
+		t.Errorf("MaxInt32 isn't set, but it should be.")
+	}
+	v.Set(math.MaxUint32)
+	if !v.Test(math.MaxUint32) {
+		t.Errorf("MaxUint32 isn't set, but it should be.")
 	}
 }
 
-func TestLen(t *testing.T) {
-	v := New(1000)
+func TestLen64(t *testing.T) {
+	v := New64(1000)
 	if l := v.Len(); l != 1000 {
 		t.Errorf("Len should be 1000, but is %d.", l)
 	}
 }
 
-func TestBitsetIsClear(t *testing.T) {
-	v := New(1000)
-	for i := uint32(0); i < 1000; i++ {
-		if v.Test(i) != false {
+func TestIsClear64(t *testing.T) {
+	v := New64(1000)
+	for i := uint64(0); i < 1000; i++ {
+		if v.Test(i) {
 			t.Errorf("Bit %d is set, and it shouldn't be.", i)
 		}
 	}
 }
 
-func TestExtendOnBoundary(t *testing.T) {
-	v := New(32)
-	v.Set(32)
+func TestExtendOnBoundary64(t *testing.T) {
+	v := New64(64)
+	v.Set(64)
 	if found := v.Test(31); found {
 		t.Error("31 shouldn't have been found")
 	}
-	if found := v.Test(32); !found {
-		t.Error("32 set and then not found")
+	if found := v.Test(64); !found {
+		t.Error("64 set and then not found")
 	}
 	if found := v.Test(33); found {
 		t.Error("33 shouldn't have been found")
 	}
 }
 
-func TestExpand(t *testing.T) {
-	v := New(0)
-	for i := uint32(1000); i > 0; i-- {
+func TestExpand64(t *testing.T) {
+	v := New64(0)
+	for i := uint64(1000); i > 0; i-- {
 		v.Set(i)
 		if found := v.Test(i); !found {
 			t.Errorf("%d set and then not found", i)
@@ -71,16 +75,16 @@ func TestExpand(t *testing.T) {
 	}
 }
 
-func TestBitsetAndGet(t *testing.T) {
-	v := New(1000)
+func TestSetAndGet64(t *testing.T) {
+	v := New64(1000)
 	v.Set(100)
 	if v.Test(100) != true {
 		t.Errorf("Bit %d is clear, and it shouldn't be.", 100)
 	}
 }
 
-func TestChain(t *testing.T) {
-	b := New(1000)
+func TestChain64(t *testing.T) {
+	b := New64(1000)
 	b.Set(100)
 	b.Set(99)
 	b.Clear(99)
@@ -89,21 +93,21 @@ func TestChain(t *testing.T) {
 	}
 }
 
-func TestOutOfBoundsLong(t *testing.T) {
-	v := New(64)
+func TestOutOfBoundsLong64(t *testing.T) {
+	v := New64(64)
 	v.Set(1000)
 }
 
-func TestOutOfBoundsClose(t *testing.T) {
-	v := New(65)
+func TestOutOfBoundsClose64(t *testing.T) {
+	v := New64(65)
 	v.Set(66)
 }
 
-func TestCount(t *testing.T) {
-	tot := uint32(64*4 + 11) // just some multi unit64 number
-	v := New(tot)
+func TestCount64(t *testing.T) {
+	tot := uint64(64*4 + 11) // just some multi unit64 number
+	v := New64(tot)
 	checkLast := true
-	for i := uint32(0); i < tot; i++ {
+	for i := uint64(0); i < tot; i++ {
 		sz := v.Count()
 		if sz != i {
 			t.Errorf("Count reported as %d, but it should be %d", sz, i)
@@ -121,10 +125,10 @@ func TestCount(t *testing.T) {
 }
 
 // test setting every 3rd bit, just in case something odd is happening
-func TestCount2(t *testing.T) {
-	tot := uint32(64*4 + 11) // just some multi unit64 number
-	v := New(tot)
-	for i := uint32(0); i < tot; i += 3 {
+func TestCountB64(t *testing.T) {
+	tot := uint64(64*4 + 11) // just some multi unit64 number
+	v := New64(tot)
+	for i := uint64(0); i < tot; i += 3 {
 		sz := v.Count()
 		if sz != i/3 {
 			t.Errorf("Count reported as %d, but it should be %d", sz, i)
@@ -134,10 +138,10 @@ func TestCount2(t *testing.T) {
 	}
 }
 
-func TestEqual(t *testing.T) {
-	a := New(100)
-	b := New(99)
-	c := New(100)
+func TestEqual64(t *testing.T) {
+	a := New64(100)
+	b := New64(99)
+	c := New64(100)
 	if a.Equal(b) {
 		t.Error("Sets of different sizes should be not be equal")
 	}
@@ -156,14 +160,14 @@ func TestEqual(t *testing.T) {
 	}
 }
 
-func TestUnion(t *testing.T) {
-	a := New(100)
-	b := New(200)
-	for i := uint32(1); i < 100; i += 2 {
+func TestUnion64(t *testing.T) {
+	a := New64(100)
+	b := New64(200)
+	for i := uint64(1); i < 100; i += 2 {
 		a.Set(i)
 		b.Set(i - 1)
 	}
-	for i := uint32(100); i < 200; i++ {
+	for i := uint64(100); i < 200; i++ {
 		b.Set(i)
 	}
 	c := a.Union(b)
@@ -176,15 +180,15 @@ func TestUnion(t *testing.T) {
 	}
 }
 
-func TestIntersection(t *testing.T) {
-	a := New(100)
-	b := New(200)
-	for i := uint32(1); i < 100; i += 2 {
+func TestIntersection64(t *testing.T) {
+	a := New64(100)
+	b := New64(200)
+	for i := uint64(1); i < 100; i += 2 {
 		a.Set(i)
 		b.Set(i - 1)
 		b.Set(i)
 	}
-	for i := uint32(100); i < 200; i++ {
+	for i := uint64(100); i < 200; i++ {
 		b.Set(i)
 	}
 	c := a.Intersection(b)
@@ -197,14 +201,14 @@ func TestIntersection(t *testing.T) {
 	}
 }
 
-func TestDifference(t *testing.T) {
-	a := New(100)
-	b := New(200)
-	for i := uint32(1); i < 100; i += 2 {
+func TestDifference64(t *testing.T) {
+	a := New64(100)
+	b := New64(200)
+	for i := uint64(1); i < 100; i += 2 {
 		a.Set(i)
 		b.Set(i - 1)
 	}
-	for i := uint32(100); i < 200; i++ {
+	for i := uint64(100); i < 200; i++ {
 		b.Set(i)
 	}
 	c := a.Difference(b)
@@ -220,15 +224,15 @@ func TestDifference(t *testing.T) {
 	}
 }
 
-func TestSymmetricDifference(t *testing.T) {
-	a := New(100)
-	b := New(200)
-	for i := uint32(1); i < 100; i += 2 {
+func TestSymmetricDifference64(t *testing.T) {
+	a := New64(100)
+	b := New64(200)
+	for i := uint64(1); i < 100; i += 2 {
 		a.Set(i)     // 01010101010 ... 0000000
 		b.Set(i - 1) // 11111111111111111000000
 		b.Set(i)
 	}
-	for i := uint32(100); i < 200; i++ {
+	for i := uint64(100); i < 200; i++ {
 		b.Set(i)
 	}
 	c := a.SymmetricDifference(b)
@@ -244,50 +248,50 @@ func TestSymmetricDifference(t *testing.T) {
 	}
 }
 
-func TestComplement(t *testing.T) {
-	a := New(50)
-	b := a.Complement()
-	if b.Count() != 50 {
-		t.Errorf("Complement failed, size should be 50, but was %d", b.Count())
-	}
-	a = New(50)
-	a.Set(10)
-	a.Set(20)
-	a.Set(42)
-	b = a.Complement()
-	if b.Count() != 47 {
-		t.Errorf("Complement failed, size should be 47, but was %d", b.Count())
-	}
-}
+// func TestComplement64(t *testing.T) {
+// 	a := New64(50)
+// 	b := a.Complement()
+// 	if b.Count() != 50 {
+// 		t.Errorf("Complement failed, size should be 50, but was %d", b.Count())
+// 	}
+// 	a = New64(50)
+// 	a.Set(10)
+// 	a.Set(20)
+// 	a.Set(42)
+// 	b = a.Complement()
+// 	if b.Count() != 47 {
+// 		t.Errorf("Complement failed, size should be 47, but was %d", b.Count())
+// 	}
+// }
 
-func BenchmarkSet(b *testing.B) {
+func BenchmarkSet64(b *testing.B) {
 	b.StopTimer()
 	r := rand.New(rand.NewSource(0))
-	sz := int32(100000)
-	s := New(uint32(sz))
+	sz := int64(100000)
+	s := New64(uint64(sz))
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		s.Set(uint32(r.Int31n(sz)))
+		s.Set(uint64(r.Int63n(sz)))
 	}
 }
 
-func BenchmarkGetTest(b *testing.B) {
+func BenchmarkGetTest64(b *testing.B) {
 	b.StopTimer()
 	r := rand.New(rand.NewSource(0))
-	sz := int32(100000)
-	s := New(uint32(sz))
+	sz := int64(100000)
+	s := New64(uint64(sz))
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		s.Test(uint32(r.Int31n(sz)))
+		s.Test(uint64(r.Int63n(sz)))
 	}
 }
 
-func BenchmarkSetExpand(b *testing.B) {
+func BenchmarkSetExpand64(b *testing.B) {
 	b.StopTimer()
-	sz := uint32(100000)
+	sz := uint64(100000)
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		s := New(0)
+		s := New64(0)
 		s.Set(sz)
 	}
 }

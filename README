@@ -1,5 +1,5 @@
-go-bitset is an efficient implementation of a map between unsigned, 32-bit
-integers and boolean values. It provides methods for setting, clearing,
+go-bitset is an efficient implementation of a map between unsigned, 32-bit or
+64-bit integers and boolean values. It provides methods for setting, clearing,
 flipping, and testing individual integers.
 
 go-bitset also provides set intersection, union, difference, complement, and
