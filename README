@@ -38,4 +38,4 @@ if b.Intersection(ob).Count() > 1 {
 }
 
 
-go-bitset is based on bitset by William Fitzgerald.
+go-bitset is based on bitset by Will Fitzgerald.
