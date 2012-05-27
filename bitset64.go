@@ -135,7 +135,7 @@ func (b *Bitset64) Equal(c *Bitset64) bool {
 	return true
 }
 
-// Bitset64 &^ (and or); difference between receiver and another set.
+// Bitset &^ (and or); difference between receiver and another set.
 func (b *Bitset64) Difference(ob *Bitset64) (result *Bitset64) {
 	result = b.Clone() // clone b (in case b is bigger than ob)
 	szl := ob.wordCount()
@@ -158,7 +158,7 @@ func sortByLength64(a *Bitset64, b *Bitset64) (ap *Bitset64, bp *Bitset64) {
 	return
 }
 
-// Bitset64 & (and); intersection of receiver and another set.
+// Bitset & (and); intersection of receiver and another set.
 func (b *Bitset64) Intersection(ob *Bitset64) (result *Bitset64) {
 	b, ob = sortByLength64(b, ob)
 	result = New64(b.n)
@@ -168,7 +168,7 @@ func (b *Bitset64) Intersection(ob *Bitset64) (result *Bitset64) {
 	return
 }
 
-// Bitset64 | (or); union of receiver and another set.
+// Bitset | (or); union of receiver and another set.
 func (b *Bitset64) Union(ob *Bitset64) (result *Bitset64) {
 	b, ob = sortByLength64(b, ob)
 	result = ob.Clone()
@@ -183,7 +183,7 @@ func (b *Bitset64) Union(ob *Bitset64) (result *Bitset64) {
 	return
 }
 
-// Bitset64 ^ (xor); symmetric difference of receiver and another set.
+// Bitset ^ (xor); symmetric difference of receiver and another set.
 func (b *Bitset64) SymmetricDifference(ob *Bitset64) (result *Bitset64) {
 	b, ob = sortByLength64(b, ob)
 	// ob is bigger, so clone it
