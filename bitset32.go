@@ -73,7 +73,7 @@ func (b *Bitset32) Flip(i uint32) {
 }
 
 // Clear all bits in the bitset.
-func (b *Bitset32) ClearAll() {
+func (b *Bitset32) Reset() {
 	for i := range b.b {
 		b.b[i] = 0
 	}
