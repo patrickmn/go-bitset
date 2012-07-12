@@ -29,7 +29,7 @@ if b.Test(1000) {
 b.Clear(1000)
 b.Set(10)
 
-ob := bitset.New64(0)
+ob := bitset.New32(0)
 // ob expands automatically
 ob.Set(10)
 
@@ -37,5 +37,7 @@ if b.Intersection(ob).Count() > 1 {
 	fmt.Println("The two sets intersect!")
 }
 
+oob := bitset.New64(0)
+oob.Set(1000000000)
 
 go-bitset is based on bitset by Will Fitzgerald.
